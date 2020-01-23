@@ -8,7 +8,7 @@ Get the app at https://www.signl4.com.
 
 Pairing checkmk with SIGNL4 can enhance your daily operations with an extension to your team wherever it is.
 
-![SIGNL4](signl4-checkmk.png)
+![SIGNL4](signl4_checkmk.png)
 
 ## Setup
 
