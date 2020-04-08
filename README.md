@@ -1,4 +1,4 @@
-# SIGNL4 Plugin for checkmk
+# SIGNL4 Package for checkmk
 
 ## Why SIGNL4
 
@@ -12,11 +12,11 @@ Pairing checkmk with SIGNL4 can enhance your daily operations with an extension 
 
 ## Setup
 
-In the following we describe the setup and configuration of the SIGNL4 Plugin for checkmk:
+In the following we describe the setup and configuration of the SIGNL4 Package for checkmk:
 
 1. If not already done, sign up for your SIGNL4 account at https://www.signl4.com or directly from within your SIGNL4 app you can download from the Play Store or App Store.
 
-2. Get the SIGNL4 plugin (SIGNL4-1.0.mkp) for checkmk from GitHub (https://github.com/signl4/signl4-integration-checkmk) or from checkmk exchange (https://checkmk.com/check_mk-exchange.php?exchange_search=signl4&sort_by=).
+2. Get the SIGNL4 package (SIGNL4-1.0.mkp) for checkmk from GitHub (https://github.com/signl4/signl4-integration-checkmk) or from checkmk exchange (https://checkmk.com/check_mk-exchange.php?exchange_search=signl4&sort_by=).
 
 3. Upload the .mkp file in the checkmk portal under Extension Packages.
 
@@ -27,6 +27,11 @@ In the following we describe the setup and configuration of the SIGNL4 Plugin fo
 ![Notifications](checkmk_package.png)
 
 6. Now you can test it by simulating an alert in checkmk. When checkmk detects an issue, the information will be forwarded to your SIGNL4 team.
+
+7. Changes
+
+v1.0 Initial version.
+v1.1 (08-04-2020): Additional parameters added, including "X-S4-ExternalID".
 
 You can find the package on GitHub:
 https://github.com/signl4/signl4-integration-checkmk
