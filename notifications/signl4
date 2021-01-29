@@ -2,7 +2,7 @@
 # SIGNL4 Alerting
 # -*- encoding: utf-8; py-indent-offset: 4 -*-
 
-# (c) 2020 Derdack GmbH
+# (c) 2021 Derdack GmbH
 #          SIGNL4 <info@signl4.com>
 
 # This is free software;  you can redistribute it and/or modify it
@@ -98,7 +98,8 @@ def get_text(context):
         'ServiceProblemId': service_problem_id,
         'DateTime': date_time,
         'X-S4-ExternalID': 'Checkmk: ' + host_name + '-' + host_problem_id + '-' + service_problem_id,
-        'X-S4-Status': s4_status
+        'X-S4-Status': s4_status,
+        'X-S4-SourceSystem': 'Checkmk'
     }
 
     return message
@@ -114,4 +115,3 @@ def send_alert(password, message):
     return 2
 
 sys.exit(main())
-
