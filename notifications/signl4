@@ -2,7 +2,7 @@
 # SIGNL4 Alerting
 # -*- encoding: utf-8; py-indent-offset: 4 -*-
 
-# (c) 2022 Derdack GmbH
+# (c) 2026 Derdack GmbH
 #          SIGNL4 <info@signl4.com>
 
 # This is free software;  you can redistribute it and/or modify it
@@ -21,6 +21,7 @@ import json
 import os
 import sys
 import base64
+import unicodedata
 
 api_url = "https://connect.signl4.com/webhook/"
 
@@ -85,7 +86,10 @@ def get_text(context):
     service_desc_base64 = ''
     service_desc_id_part = ''
     if len(service_desc) > 0:
-        service_desc_bytes = service_desc.encode("ascii")
+        # orig: service_desc_bytes = service_desc.encode("ascii")
+        # use unicode Normalization Form Compatibility Decomposition to make unique but valid ascii
+        # even if service_desc includes i.e. german umlauts
+        service_desc_bytes = unicodedata.normalize("NFKD",service_desc).encode("ascii","ignore")
         service_desc_base64 = base64.b64encode(service_desc_bytes).decode()
         service_desc_id_part = ':ServiceDesc:' + service_desc_base64
 
@@ -123,3 +127,4 @@ def send_alert(password, message):
     return 2
 
 sys.exit(main())
+
