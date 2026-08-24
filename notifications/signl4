@@ -22,6 +22,7 @@ import os
 import sys
 import base64
 import unicodedata
+from cmk.notification_plugins.utils import get_password_from_env_or_context
 
 api_url = "https://connect.signl4.com/webhook/"
 
@@ -32,7 +33,9 @@ def main():
 
     message    = get_text(context)
 
-    password = context["PARAMETER_PASSWORD"]
+    password = get_password_from_env_or_context(
+        key="NOTIFY_PARAMETER_PASSWORD"
+    )
 
     return send_alert(password, message)
 
