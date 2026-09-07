@@ -70,7 +70,6 @@ def get_text(context):
             service_desc = context['SERVICEDESC']
             description += ' (' + service_desc + ')'
     
-
     else:
         if notification_type in [ "PROBLEM", "RECOVERY" ]:
             host_state = context.get('HOSTSTATE') or ''
