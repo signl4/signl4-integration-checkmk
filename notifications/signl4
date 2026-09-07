@@ -69,6 +69,7 @@ def get_text(context):
         else:
             service_desc = context['SERVICEDESC']
             description += ' (' + service_desc + ')'
+    
 
     else:
         if notification_type in [ "PROBLEM", "RECOVERY" ]:
@@ -96,6 +97,13 @@ def get_text(context):
         service_desc_base64 = base64.b64encode(service_desc_bytes).decode()
         service_desc_id_part = ':ServiceDesc:' + service_desc_base64
 
+    if context['WHAT'] == 'SERVICE':
+        x_s4_external_id = 'Checkmk: ' + host_name + '-' + service_problem_id + service_desc_id_part
+    else:
+        x_s4_external_id = 'Checkmk: ' + host_name + '-' + host_problem_id + service_desc_id_part
+    # NOTE: When a serivce problem occurs and then the host goes DOWN, a new host_problem_id will be created by Checkmk.
+    # So when the host recovers and then the service recovers, SIGNL4 will not find the combination of the old host_problem_id + service_problem_id.
+
     message = {
         'Title': description,
         'HostName': host_name,
@@ -112,7 +120,7 @@ def get_text(context):
         'HostProblemId': host_problem_id,
         'ServiceProblemId': service_problem_id,
         'DateTime': date_time,
-        'X-S4-ExternalID': 'Checkmk: ' + host_name + '-' + host_problem_id + '-' + service_problem_id + service_desc_id_part,
+        'X-S4-ExternalID': x_s4_external_id,
         'X-S4-Status': s4_status,
         'X-S4-SourceSystem': 'Checkmk'
     }
