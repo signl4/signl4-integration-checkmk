@@ -85,6 +85,10 @@ def get_text(context):
     s4_status = 'new'
     if notification_type == 'RECOVERY':
         s4_status = 'resolved'
+    elif context['WHAT'] == 'SERVICE' and notification_type == 'PROBLEM':
+        prev_state = context.get('PREVIOUSSERVICEHARDSTATE', '')
+        if prev_state == 'CRITICAL' and service_state == 'WARNING':
+            s4_status = 'resolved'
     
     service_desc_base64 = ''
     service_desc_id_part = ''
