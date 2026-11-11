@@ -96,6 +96,11 @@ def get_text(context):
         service_desc_base64 = base64.b64encode(service_desc_bytes).decode()
         service_desc_id_part = ':ServiceDesc:' + service_desc_base64
 
+    if context['WHAT'] == 'SERVICE':
+        x_s4_external_id = 'Checkmk: ' + host_name + '-0-' + service_problem_id + service_desc_id_part
+    else:
+        x_s4_external_id = 'Checkmk: ' + host_name + '-' + host_problem_id + '-' + service_desc_id_part
+
     message = {
         'Title': description,
         'HostName': host_name,
@@ -112,7 +117,7 @@ def get_text(context):
         'HostProblemId': host_problem_id,
         'ServiceProblemId': service_problem_id,
         'DateTime': date_time,
-        'X-S4-ExternalID': 'Checkmk: ' + host_name + '-' + host_problem_id + '-' + service_problem_id + service_desc_id_part,
+        'X-S4-ExternalID': x_s4_external_id,
         'X-S4-Status': s4_status,
         'X-S4-SourceSystem': 'Checkmk'
     }
